@@ -1,9 +1,12 @@
-use std::error::Error;
-use std::fs::{read_to_string};
 use itertools::Itertools as _;
+use std::error::Error;
+use std::fs::read_to_string;
 
 fn main() -> Result<(), Box<dyn Error>> {
-    let lines: Vec<String> = read_to_string("input03.txt")?.lines().map(|x|x.into()).collect();
+    let lines: Vec<String> = read_to_string("input03.txt")?
+        .lines()
+        .map(|x| x.into())
+        .collect();
 
     let mut ox = String::new();
     let mut co2 = String::new();
@@ -30,9 +33,9 @@ fn main() -> Result<(), Box<dyn Error>> {
                 }
             }
         }
-        ox.push(if oxb.1 >= oxb.0 {'1'} else {'0'});
+        ox.push(if oxb.1 >= oxb.0 { '1' } else { '0' });
         if co2b.0 + co2b.1 > 1 {
-            co2.push(if co2b.1 < co2b.0 {'1'} else {'0'});
+            co2.push(if co2b.1 < co2b.0 { '1' } else { '0' });
         } else if co2b.0 + co2b.1 == 1 {
             co2 = co2only.clone();
         }
