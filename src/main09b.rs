@@ -20,29 +20,40 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     for (y, l) in lines.iter().enumerate() {
         for (x, c) in l.chars().enumerate() {
-            a.insert((x as isize,y as isize), c.to_string().parse().unwrap());
+            a.insert((x as isize, y as isize), c.to_string().parse().unwrap());
         }
     }
 
-    let dirs = [(1isize,0isize),(0,1),(-1,0),(0,-1)];
+    let dirs = [(1isize, 0isize), (0, 1), (-1, 0), (0, -1)];
 
     let mut res = 0;
 
     for y in 0..lines.len() as isize {
         for x in 0..lines[0].len() as isize {
-            let c: i64 = a[&(x,y)];
+            let c: i64 = a[&(x, y)];
             if c == 9 {
                 continue;
             }
-            let matching_basins = (basins.get(&(x-1,y)).copied(), basins.get(&(x,y-1)).copied());
+            let matching_basins = (
+                basins.get(&(x - 1, y)).copied(),
+                basins.get(&(x, y - 1)).copied(),
+            );
             match matching_basins {
                 (Some(a), Some(b)) => {
-                    basinmap.insert(max(a,b), min(a, b));
-                    basins.insert((x,y), min(a,b));
-                },
-                (Some(a), None) => {basins.insert((x,y), a);},
-                (None, Some(a)) => {basins.insert((x,y), a);},
-                (None, None) => {basins.insert((x,y), nextb); basinmap.insert(nextb, nextb); nextb += 1;},
+                    basinmap.insert(max(a, b), min(a, b));
+                    basins.insert((x, y), min(a, b));
+                }
+                (Some(a), None) => {
+                    basins.insert((x, y), a);
+                }
+                (None, Some(a)) => {
+                    basins.insert((x, y), a);
+                }
+                (None, None) => {
+                    basins.insert((x, y), nextb);
+                    basinmap.insert(nextb, nextb);
+                    nextb += 1;
+                }
             }
         }
     }
@@ -50,7 +61,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut sizes = BTreeMap::new();
     for y in 0..lines.len() as isize {
         for x in 0..lines[0].len() as isize {
-            let mut bb = *basins.get(&(x,y)).unwrap_or(&0);
+            let mut bb = *basins.get(&(x, y)).unwrap_or(&0);
             while bb > 0 && basinmap[&bb] != bb {
                 bb = basinmap[&bb];
             }
@@ -70,7 +81,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     szs.sort();
     szs.reverse();
 
-    let res = szs[0]*szs[1]*szs[2];
+    let res = szs[0] * szs[1] * szs[2];
 
     println!("{}", res);
     Ok(())

@@ -14,11 +14,11 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     for (y, l) in lines.iter().enumerate() {
         for (x, c) in l.chars().enumerate() {
-            a.insert((x as isize,y as isize), c.to_string().parse().unwrap());
+            a.insert((x as isize, y as isize), c.to_string().parse().unwrap());
         }
     }
 
-    let dirs = [(1isize,0isize),(0,1),(-1,0),(0,-1)];
+    let dirs = [(1isize, 0isize), (0, 1), (-1, 0), (0, -1)];
 
     let mut res = 0;
 
@@ -28,14 +28,14 @@ fn main() -> Result<(), Box<dyn Error>> {
             for d in dirs {
                 let xx = x + d.0;
                 let yy = y + d.1;
-                if a.get(&(xx, yy)).unwrap_or(&9999) <= &a[&(x,y)] {
+                if a.get(&(xx, yy)).unwrap_or(&9999) <= &a[&(x, y)] {
                     lowest = false;
                     break;
                 }
             }
             if lowest {
                 // dbg!(x,y,a[&(x,y)]);
-                res += 1 + a[&(x,y)];
+                res += 1 + a[&(x, y)];
             }
         }
     }

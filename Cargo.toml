@@ -81,3 +81,10 @@ path = "src/main09a.rs"
 name = "main09b"
 path = "src/main09b.rs"
 
+[[bin]]
+name = "main10a"
+path = "src/main10a.rs"
+
+[[bin]]
+name = "main10b"
+path = "src/main10b.rs"

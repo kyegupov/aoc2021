@@ -36,12 +36,22 @@ fn main() -> Result<(), Box<dyn Error>> {
         for p in base.keys().permutations(7) {
             let permuted: BTreeSet<String> = digs
                 .iter()
-                .map(|w| w.chars().map(|c| p[(c as usize)-('a' as usize)]).sorted().join(""))
+                .map(|w| {
+                    w.chars()
+                        .map(|c| p[(c as usize) - ('a' as usize)])
+                        .sorted()
+                        .join("")
+                })
                 .collect();
             if permuted == digits_set {
                 let permuted_out: Vec<String> = out
                     .iter()
-                    .map(|w| w.chars().map(|c| p[(c as usize)-('a' as usize)]).sorted().join(""))
+                    .map(|w| {
+                        w.chars()
+                            .map(|c| p[(c as usize) - ('a' as usize)])
+                            .sorted()
+                            .join("")
+                    })
                     .collect();
                 let mut x = 0i64;
                 for w in permuted_out {
