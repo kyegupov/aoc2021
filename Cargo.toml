@@ -120,3 +120,11 @@ path = "src/main14a.rs"
 [[bin]]
 name = "main14b"
 path = "src/main14b.rs"
+
+[[bin]]
+name = "main15a"
+path = "src/main15a.rs"
+
+[[bin]]
+name = "main15b"
+path = "src/main15b.rs"
