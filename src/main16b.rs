@@ -4,31 +4,6 @@ use std::collections::{BTreeMap, BTreeSet, BinaryHeap, LinkedList};
 use std::error::Error;
 use std::fs::read_to_string;
 
-#[derive(Copy, Clone, Eq, PartialEq)]
-struct Cell {
-    xy: (isize, isize),
-    dist: i64,
-}
-
-impl Ord for Cell {
-    fn cmp(&self, other: &Self) -> Ordering {
-        // Notice that the we flip the ordering on costs.
-        // In case of a tie we compare positions - this step is necessary
-        // to make implementations of `PartialEq` and `Ord` consistent.
-        other
-            .dist
-            .cmp(&self.dist)
-            .then_with(|| self.xy.cmp(&other.xy))
-    }
-}
-
-// `PartialOrd` needs to be implemented as well.
-impl PartialOrd for Cell {
-    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-        Some(self.cmp(other))
-    }
-}
-
 fn get_num(bits: &Vec<bool>, pos: &mut usize, n: usize) -> usize {
     let mut res = 0;
     for _ in 0..n {
