@@ -9,7 +9,6 @@ edition = "2021"
 itertools = "*"
 maplit = "*"
 nom = "*"
-rayon = "*"
 
 [[bin]]
 name = "main01a"
@@ -190,3 +189,7 @@ path = "src/main23.rs"
 [[bin]]
 name = "main24"
 path = "src/main24.rs"
+
+[[bin]]
+name = "main25"
+path = "src/main25.rs"
